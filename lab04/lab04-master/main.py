@@ -4,7 +4,7 @@
 
 import contacts
 
-contact_dictionary = []
+contact_dictionary = {}
 
 while True:
 
@@ -16,30 +16,38 @@ while True:
     print("5. Find contact")
     print("6. Exit the program")
     
-    choice = input("Enter menu choice: ")
+    choice = int(input("Enter menu choice: "))
 
     match choice:
 
         case 1:
-            id = ("Enter phone number: ")
-            first_name = input("Enter first name:")
-            last_name = input("Enter last name:")
-            added = add_contact(contact_dictionary, id, first_name, last_name)
-            print("Added: " + added)
+            id = input("Enter phone number: ")
+            first_name = input("Enter first name: ")
+            last_name = input("Enter last name: ")
+            added = contacts.add_contact(contact_dictionary, id, first_name, last_name)
+            if added == 'error':
+                print(added)
+            else:
+                print("Added: " + str(added) + "\n")
 
         case 2: 
-            id = ("Enter phone number: ")
-            first_name = input("Enter first name:")
-            last_name = input("Enter last name:")
-            modified = add_contact(contact_dictionary, id, first_name, last_name)
-            print("Modified: " + modified)
+            id = input("Enter phone number: ")
+            first_name = input("Enter first name: ")
+            last_name = input("Enter last name: ")
+
+            modified = contacts.modify_contact(contact_dictionary, id, first_name, last_name)
+            if modified == 'error':
+                print(modified)
+            else:
+                print("Modified: " + str(modified))
         
         case 3:
-            id = ("Enter phone number: ")
-            deleted = add_contact(contact_dictionary, id, first_name, last_name)
+            id = input("Enter phone number: ")
+            deleted = contacts.delete_contact(contact_dictionary, id)
             if deleted == 'error':
                 print("Invalid phone number")
-            print("Deleted: " + deleted)
+            else:
+                print("Deleted: " + str(deleted))
 
         case 4:
             print("==============CONTACT LIST=================")
@@ -49,11 +57,11 @@ while True:
                 fullName = contact_dictionary[key]
                 first_name = fullName[0]
                 last_name = fullName[1]
-                print(last_name + "          " + first_name + "Name          " + key)
+                print(str(last_name) + "             " + str(first_name) + "               " + str(key))
         
         case 5:
             find = input("Enter search string: ")
-            found = find_contact(contact_dictionary)
+            found = contacts.find_contact(contact_dictionary, find)
             if found == {}:
                 print("============= NO CONTACT FOUND ===========")
                 continue
@@ -65,7 +73,7 @@ while True:
                 fullName = contact_dictionary[key]
                 first_name = fullName[0]
                 last_name = fullName[1]
-                print(last_name + "          " + first_name + "Name          " + key)
+                print(str(last_name) + "          " + str(first_name) + "Name          " + str(key))
         case 6:
             break
 
