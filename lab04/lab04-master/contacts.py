@@ -47,29 +47,32 @@ def delete_contact(contact_dictionary, id):
 
 def sort_contacts(contact_dictionary):
     #sorts contacts by last name, then by first ignoring case
-    return contact_dictionary.sort(key=lambda x: [x[1], x[0]])
+    # return contact_dictionary.sort(key=lambda x: [x[1], x[0]])
+    return dict(sorted(contact_dictionary.items(), key=lambda x: [x[1][1], x[1][0]]))
 
 
 def find_contact(contact_dictionary, find): 
     #locates find in the contact dictionary
 
-    temp = []
+        temp = {}
 
-    if find.isnumeric() and find in contact_dictionary:
-        key = int(find)
-        value = contact_dictionary[find]
-        # temp[key] = value
-        temp.append({key: value})
-
-    for keys in contact_dictionary.keys():
-        value = contact_dictionary[keys]
-
-        if value[0] == find or value[1] == find:
+        if find.isnumeric() and int(find) in contact_dictionary:
+            key = int(find)
+            value = contact_dictionary[key]
             temp[key] = value
 
-    temp = temp.sort(key=lambda x: [x[1], x[0]])
+        else:
+            find = find.capitalize()
+            for key in contact_dictionary.keys():
+                value = contact_dictionary[key]
 
-    return temp
+                if value[0] == find or value[1] == find:
+                    temp[key] = value
+
+        temp = sort_contacts(temp)
+        print(temp)
+
+        return temp
 
 
 

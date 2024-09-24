@@ -73,7 +73,7 @@ while True:
                 fullName = contact_dictionary[key]
                 first_name = fullName[0]
                 last_name = fullName[1]
-                print(str(last_name) + "          " + str(first_name) + "Name          " + str(key))
+                print(str(last_name) + "             " + str(first_name) + "               " + str(key))
         case 6:
             break
 
@@ -84,6 +84,6 @@ while True:
             
 
 
-
+#c = {7145551111: ['Alpha', 'Jobs'], 7145552222: ['Steve', 'Jobs'], 5625553333: ['Bill', 'Gates']} 
 
 
